@@ -1,42 +1,9 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const app = express();
-const port = process.env.PORT || 5000;
+const { argv } = require('yargs');
+const path = require('path');
+const Todo = require('./Todo');
+const { saveFile, readFile } = require('./utils');
+const { ADD, UPDATE, NEXT, DONE, FIND, LIST } = require('./commands');
 
-// middleware
-app.use(cors());
-app.use(express.json());
+(function init() {
 
-
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.squelfm.mongodb.net/?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
-async function run(){
-    try{
-        await client.connect();
-        const organicCollection = client.db('organicLife').collection('item');
-
-        app.get('/item', async(req, res) => {
-            const query = {};
-            const cursor = organicCollection.find(query);
-            const items = await cursor.toArray();
-            res.send(items);
-        })
-    }
-    finally{
-
-    }
-}
-
-run().catch(console.dir);
-
-
-app.get('/', (req, res) => {
-    res.send('server running');
-});
-
-app.listen(port, () => {
-    console.log('listening');
-})
+})();
