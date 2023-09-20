@@ -52,7 +52,7 @@ class Todo {
     return this.todoList;
   }
 
-  find() {
+  find(term) {
     const result = [];
     for (let i = 0; i < this.todoList.length; i++) {
       const item = this.todoList[i];
