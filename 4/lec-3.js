@@ -1,5 +1,5 @@
 /**
- * Array push and pull methods
+ * Array push and pop methods
  */
 
 /*
